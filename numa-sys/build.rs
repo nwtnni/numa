@@ -16,6 +16,14 @@ fn main() {
         builder = builder.clang_arg(format!("-I{}", include.display()));
     }
 
+    if cfg!(feature = "static") {
+        println!("cargo:rustc-link-lib=static=numa");
+    } else if cfg!(feature = "dynamic") {
+        println!("cargo:rustc-link-lib=numa");
+    } else {
+        panic!("Must set either static or dynamic feature to select linking.");
+    }
+
     builder
         .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         .generate()

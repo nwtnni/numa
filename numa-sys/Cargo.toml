@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 links = "numa"
 
+[features]
+static = []
+dynamic = []
+
 [build-dependencies]
 bindgen = "0.69"
 pkg-config = "0.3"
